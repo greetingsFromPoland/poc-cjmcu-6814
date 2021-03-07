@@ -1,15 +1,16 @@
-#include "MICS6814.h"
+#include "CJMCUS6814.hpp"
 
-#define PIN_CO  A1
+#define PIN_CO A0
 #define PIN_NO2 A2
-#define PIN_NH3 A3
+#define PIN_NH3 A1
 
-MICS6814 gas(PIN_CO, PIN_NO2, PIN_NH3);
+CJMCUS6814 gas(PIN_CO, PIN_NO2, PIN_NH3);
 
-void setup() {
+void setup()
+{
   Serial.begin(115200);
 
-  Serial.println("MICS-6814 Sensor Sample");
+  Serial.println("CJMCUS-6814 Sensor Sample");
   Serial.print("Calibrating Sensor");
 
   gas.calibrate();
@@ -17,39 +18,16 @@ void setup() {
   Serial.println("OK!");
 }
 
-void loop() {
-  Serial.print("NH3: ");
- Serial.print(gas.getResistance(CH_NH3));
- Serial.print("/");
- Serial.print(gas.getBaseResistance(CH_NH3));
- Serial.print(" = ");
- Serial.print(gas.getCurrentRatio(CH_NH3));
- Serial.print(" => ");
-  Serial.print(gas.measure(NH3));
-  Serial.println("ppm");
+void loop()
+{
+
+  gas.print(CO);
+  delay(50);
+  gas.print(NO2);
+  delay(50);
+  gas.print(NH3);
   delay(50);
 
- Serial.print("CO: ");
- Serial.print(gas.getResistance(CH_CO));
- Serial.print("/");
- Serial.print(gas.getBaseResistance(CH_CO));
- Serial.print(" = ");
- Serial.print(gas.getCurrentRatio(CH_CO));
- Serial.print(" => ");
- Serial.print(gas.measure(CO));
- Serial.println("ppm");
- delay(50);
 
- Serial.print("NO2: ");
- Serial.print(gas.getResistance(CH_NO2));
- Serial.print("/");
- Serial.print(gas.getBaseResistance(CH_NO2));
- Serial.print(" = ");
- Serial.print(gas.getCurrentRatio(CH_NO2));
- Serial.print(" => ");
- Serial.print(gas.measure(NO2));
- Serial.println("ppm");
- delay(50);
-
-  delay(1000);
+  delay(3000);
 }
