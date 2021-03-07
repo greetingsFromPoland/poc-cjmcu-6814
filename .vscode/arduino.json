@@ -1,7 +1,0 @@
-{
-    "port": "/dev/cu.usbserial-14310",
-    "board": "arduino:avr:mini",
-    "sketch": "../PoC/cjmcu-6814/App/App.ino",
-    "output": "../build",
-    "configuration": "cpu=atmega328"
-}
